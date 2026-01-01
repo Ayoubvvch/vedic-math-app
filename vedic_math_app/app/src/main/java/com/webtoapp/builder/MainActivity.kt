@@ -1,4 +1,4 @@
-package com.vedicmath.app
+package com.webtoapp.builder
 
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
@@ -13,7 +13,12 @@ import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 
 /**
- * النشاط الرئيسي للتطبيق - يعرض محتوى HTML باستخدام WebView
+ * WebToApp Builder - Activity الرئيسية
+ * تقوم بعرض محتوى HTML/CSS/JS باستخدام WebView
+ * 
+ * للاستخدام:
+ * 1. ضع ملفات HTML في مجلد assets/www/
+ * 2. يمكن تخصيص الإعدادات في assets/config.json
  */
 class MainActivity : AppCompatActivity() {
 
@@ -34,14 +39,14 @@ class MainActivity : AppCompatActivity() {
         // تفعيل JavaScript للتفاعل مع الصفحة
         webSettings.javaScriptEnabled = true
 
-        // تفعيل تخزين DOM
+        // تفعيل تخزين DOM (LocalStorage, SessionStorage)
         webSettings.domStorageEnabled = true
 
         // تفعيل التكبير والتصغير
         webSettings.builtInZoomControls = true
         webSettings.displayZoomControls = false
 
-        // إعدادات العرض
+        // إعدادات العرض المتجاوب
         webSettings.useWideViewPort = true
         webSettings.loadWithOverviewMode = true
 
@@ -51,6 +56,8 @@ class MainActivity : AppCompatActivity() {
         // إعدادات الأمان
         webSettings.allowFileAccess = true
         webSettings.allowContentAccess = true
+        webSettings.allowFileAccessFromFileURLs = true
+        webSettings.allowUniversalAccessFromFileURLs = true
 
         // تعيين عميل WebView مخصص
         webView.webViewClient = object : WebViewClient() {
@@ -60,7 +67,7 @@ class MainActivity : AppCompatActivity() {
             ): Boolean {
                 val url = request?.url.toString()
 
-                // إذا كان الرابط خارجي ( يبدأ بـ http أو https )، افتحه في المتصفح الخارجي
+                // إذا كان الرابط خارجي، افتحه في المتصفح الخارجي
                 if (url.startsWith("http://") || url.startsWith("https://")) {
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                     startActivity(intent)
@@ -73,12 +80,11 @@ class MainActivity : AppCompatActivity() {
 
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
-                // إخفاء مؤشر التحميل عند اكتمال تحميل الصفحة
                 progressDialog?.dismiss()
             }
         }
 
-        // تعيين عميل Chrome لتحميل الملفات بشكل أفضل
+        // تعيين عميل Chrome لتحميل الملفات
         webView.webChromeClient = object : WebChromeClient() {
             override fun onProgressChanged(view: WebView?, newProgress: Int) {
                 if (newProgress < 100) {
@@ -97,8 +103,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // تحميل ملف HTML من مجلد assets
-        webView.loadUrl("file:///android_asset/index.html")
+        // تحميل ملف HTML من مجلد www (الافتراضي)
+        webView.loadUrl("file:///android_asset/www/index.html")
     }
 
     /**
@@ -106,11 +112,9 @@ class MainActivity : AppCompatActivity() {
      */
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
-        // إذا كان بالإمكان الرجوع في تاريخ WebView، افعل ذلك
         if (webView.canGoBack()) {
             webView.goBack()
         } else {
-            // أغلق التطبيق
             super.onBackPressed()
         }
     }

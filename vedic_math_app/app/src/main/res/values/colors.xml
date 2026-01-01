@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- الألوان الأساسية للتطبيق -->
-    <color name="indigo_700">#4338CA</color>
-    <color name="indigo_800">#3730A3</color>
-    <color name="indigo_600">#4F46E5</color>
-    <color name="indigo_500">#6366F1</color>
+    <!-- ألوان WebToApp Builder -->
+    <color name="webtoapp_primary">#3DDC84</color>
+    <color name="webtoapp_primary_dark">#2DC26B</color>
+    <color name="webtoapp_secondary">#202124</color>
+    <color name="webtoapp_secondary_dark">#1A1A1A</color>
 
     <!-- الألوان الأساسية -->
     <color name="white">#FFFFFF</color>

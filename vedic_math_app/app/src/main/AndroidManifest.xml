@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- إذن الإنترنت مطلوب لتحميل الموارد الخارجية مثل Tailwind CSS وخطوط Google -->
+    <!-- إذن الإنترنت مطلوب لتحميل الموارد الخارجية (Tailwind, fonts, CDN) -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.VedicMathApp">
+        android:theme="@style/Theme.WebToApp">
 
         <activity
             android:name=".MainActivity"

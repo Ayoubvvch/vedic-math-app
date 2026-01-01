@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.vedicmath.app"
+    namespace = "com.webtoapp.builder"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.vedicmath.app"
+        applicationId = "com.webtoapp.builder"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

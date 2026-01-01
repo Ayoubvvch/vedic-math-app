@@ -1,4 +1,4 @@
-name: بناء تطبيق الرياضيات الفيدية
+name: 🚀 WebToApp Builder
 
 on:
   push:
@@ -13,40 +13,41 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: بناء APK
+    name: 📦 بناء APK
     steps:
-      - name: التحقق من الكود
+      - name: 📥 التحقق من الكود
         uses: actions/checkout@v4
 
-      - name: إعداد Java
+      - name: ☕ إعداد Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
           cache: gradle
 
-      - name: إعداد Android SDK
+      - name: 🤖 إعداد Android SDK
         uses: android-actions/setup-android@v3
         with:
           api-level: 34
           build-tools: 34.0.0
 
-      - name: منح صلاحية التنفيذ لـ Gradle
+      - name: 🔧 منح صلاحية التنفيذ لـ Gradle
         run: chmod +x gradlew
 
-      - name: بناء التطبيق
+      - name: 🔨 بناء التطبيق
         run: ./gradlew assembleDebug --stacktrace
 
-      - name: رفع ملف APK
+      - name: 📤 رفع ملف APK
         uses: actions/upload-artifact@v4
         with:
-          name: vedic-math-app.apk
+          name: webtoapp-builder.apk
           path: app/build/outputs/apk/debug/app-debug.apk
           retention-days: 7
 
-      - name: عرض معلومات الملف
+      - name: ℹ️ عرض معلومات الملف
         run: |
-          echo "=== معلومات ملف APK ==="
+          echo "=== 📱 معلومات ملف APK ==="
           ls -lh app/build/outputs/apk/debug/app-debug.apk
           echo ""
-          echo "رابط التحميل سيكون متاحاً بعد انتهاء العملية"
+          echo "✅ تم بناء APK بنجاح!"
+          echo "📥 حمل الملف من قسم Artifacts في الأسفل"
